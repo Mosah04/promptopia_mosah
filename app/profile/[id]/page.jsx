@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 import Profile from "@components/Profile";
 
 const MyProfile = () => {
-  const { data: session } = useSession();
   const { id: userId } = useParams();
   const searchParams = useSearchParams();
   const userName = searchParams.get("name");
@@ -21,16 +20,13 @@ const MyProfile = () => {
 
       setPosts(data);
     };
-    console.log("user", session?.user);
-    console.log(session);
-    if (session?.user.id) fetchPosts();
+    if (userId) fetchPosts();
   }, []);
 
-  console.log("userId", userId);
   return (
     <Profile
       name={userName[0].toUpperCase() + userName.slice(1).toLowerCase()}
-      desc={`Welcome to your ${userName} profile page. Explore ${userName} exceptional prompts and be inspired by the power of their imagination.`}
+      desc={`Welcome to ${userName} profile page. Explore ${userName} exceptional prompts and be inspired by the power of their imagination.`}
       data={posts}
     />
   );
