@@ -18,7 +18,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
 };
 
 const Feed = () => {
-  const [allPosts, setAllPosts] = useState(null);
+  const [allPosts, setAllPosts] = useState([]);
 
   const [searchText, setSearchText] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
@@ -42,9 +42,9 @@ const Feed = () => {
 
     return allPosts.filter(
       (post) =>
-        regex.test(post.creator.username) ||
-        regex.test(post.tag) ||
-        regex.test(post.prompt)
+        regex.test(post?.creator?.username) ||
+        regex.test(post?.tag) ||
+        regex.test(post?.prompt)
     );
   };
 
@@ -77,7 +77,6 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-      {console.log("Prompt", allPosts)}
       {allPosts?.length > 0 ? (
         <PromptCardList
           data={isSearching ? searchedResults : allPosts}
