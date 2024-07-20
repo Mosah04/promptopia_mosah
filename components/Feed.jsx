@@ -26,6 +26,17 @@ const Feed = () => {
 
   const isSearching = searchText.trim() !== "";
 
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await fetch("/api/prompt");
+      const data = await response.json();
+
+      setAllPosts(data);
+    };
+
+    fetchPosts();
+  }, []);
+
   const filterPrompts = (searchText) => {
     const regex = new RegExp(searchText, "i");
 
@@ -54,17 +65,6 @@ const Feed = () => {
     setSearchedResults(searchResult);
   };
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await fetch("/api/prompt");
-      const data = await response.json();
-
-      setAllPosts(data);
-    };
-
-    fetchPosts();
-  }, []);
-
   return (
     <section className="feed">
       <form className="relative w-full flex-center">
@@ -77,11 +77,15 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-
-      <PromptCardList
-        data={isSearching ? searchedResults : allPosts}
-        handleTagClick={handleTagClick}
-      />
+      {console.log("Prompt", allPosts)}
+      {allPosts?.length > 0 ? (
+        <PromptCardList
+          data={isSearching ? searchedResults : allPosts}
+          handleTagClick={handleTagClick}
+        />
+      ) : (
+        <div className="desc text-center mt-16"> No prompt found</div>
+      )}
     </section>
   );
 };
