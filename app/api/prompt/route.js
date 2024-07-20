@@ -9,6 +9,7 @@ export const GET = async (request) => {
 
     return new Response(JSON.stringify(prompts), { status: 200 });
   } catch (error) {
+    console.log("erreur", error);
     return new Response("Error while fetching prompts", { status: 500 });
   }
 };
