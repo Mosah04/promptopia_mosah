@@ -11,6 +11,7 @@ export const GET = async (request, { params: { id } }) => {
 
     return new Response(JSON.stringify(prompt), { status: 200 });
   } catch (error) {
+    console.log("erreur", error);
     return new Response("Error while fetching prompt", { status: 500 });
   }
 };
@@ -33,6 +34,7 @@ export const PATCH = async (request, { params: { id } }) => {
 
     return new Response(JSON.stringify(existingPrompt), { status: 200 });
   } catch (error) {
+    console.log("erreur", error);
     return new Response("Failed to update the prompt", { status: 500 });
   }
 };
@@ -45,6 +47,7 @@ export const DELETE = async (request, { params: { id } }) => {
 
     return new Response("Prompt deted succesfully", { status: 200 });
   } catch (error) {
+    console.log("erreur", error);
     return new Response("Error while deleting prompt", { status: 500 });
   }
 };
