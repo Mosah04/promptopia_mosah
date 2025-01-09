@@ -17,25 +17,12 @@ const PromptCardList = ({ data, handleTagClick }) => {
   );
 };
 
-const Feed = () => {
-  const [allPosts, setAllPosts] = useState([]);
-
+const Feed = ({ allPosts }) => {
   const [searchText, setSearchText] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
 
   const isSearching = searchText.trim() !== "";
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const response = await fetch("/api/prompt");
-      const data = await response.json();
-
-      setAllPosts(data);
-    };
-
-    fetchPosts();
-  }, []);
 
   const filterPrompts = (searchText) => {
     const regex = new RegExp(searchText, "i");
