@@ -1,17 +1,6 @@
 import Feed from "@components/Feed";
 
-const Home = async () => {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-
-  // Fetching data server-side
-  const response = await fetch(
-    `${baseUrl}/api/prompt?timestamp=${Date.now()}`,
-    {
-      cache: "no-store",
-    }
-  );
-  const data = await response.json();
-
+const Home = () => {
   return (
     <section className="w-full flex-center flex-col">
       <h1 className="head_text text-center">
@@ -24,7 +13,7 @@ const Home = async () => {
         discover, create and share creative prompts.
       </p>
 
-      <Feed allPosts={data} />
+      <Feed />
     </section>
   );
 };
