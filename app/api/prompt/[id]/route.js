@@ -1,5 +1,6 @@
 import { connectToDB } from "@utils/database";
 import Prompt from "@models/prompt";
+import { revalidatePath } from "@node_modules/next/cache";
 
 export const GET = async (request, { params: { id } }) => {
   try {
@@ -32,6 +33,7 @@ export const PATCH = async (request, { params: { id } }) => {
 
     await existingPrompt.save();
 
+    revalidatePath("/");
     return new Response(JSON.stringify(existingPrompt), { status: 200 });
   } catch (error) {
     console.log("erreur", error);
