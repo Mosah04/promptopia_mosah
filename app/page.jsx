@@ -4,9 +4,12 @@ const Home = async () => {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
   // Fetching data server-side
-  const response = await fetch(`${baseUrl}/api/prompt`, {
-    cache: "no-store",
-  });
+  const response = await fetch(
+    `${baseUrl}/api/prompt?timestamp=${Date.now()}`,
+    {
+      cache: "no-store",
+    }
+  );
   const data = await response.json();
 
   return (
