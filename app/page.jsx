@@ -1,11 +1,7 @@
 import Feed from "@components/Feed";
-import { headers } from "next/headers";
 
 const Home = async () => {
-  const headersList = headers();
-  const host = headersList.get("host");
-  const protocol = host.includes("localhost") ? "http" : "https";
-  const baseUrl = `${protocol}://${host}`;
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
   // Fetching data server-side
   const response = await fetch(`${baseUrl}/api/prompt`, {
