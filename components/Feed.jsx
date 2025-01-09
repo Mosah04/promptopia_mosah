@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import PromptCard from "./PromptCard";
-import { useRouter } from "@node_modules/next/router";
+import { useRouter } from "@node_modules/next/navigation";
 
 const PromptCardList = ({ data, handleTagClick }) => {
   return (
@@ -19,6 +19,8 @@ const PromptCardList = ({ data, handleTagClick }) => {
 };
 
 const Feed = () => {
+  const router = useRouter();
+
   const [allPosts, setAllPosts] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
@@ -35,6 +37,10 @@ const Feed = () => {
     };
 
     fetchPosts();
+  }, []);
+
+  useEffect(() => {
+    router.refresh();
   }, []);
 
   const filterPrompts = (searchText) => {
